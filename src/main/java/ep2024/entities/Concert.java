@@ -2,10 +2,17 @@ package ep2024.entities;
 
 import ep2024.enums.ConcertGenre;
 import ep2024.enums.EventType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "concerts")
 public class Concert extends Event {
+    @Enumerated(EnumType.STRING)
     private ConcertGenre genre;
     private boolean inStreaming;
 

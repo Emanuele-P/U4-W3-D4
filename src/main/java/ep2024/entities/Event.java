@@ -9,6 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "events")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Event {
     @Id
     @GeneratedValue

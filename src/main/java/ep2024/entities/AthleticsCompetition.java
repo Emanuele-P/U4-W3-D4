@@ -1,14 +1,25 @@
 package ep2024.entities;
 
 import ep2024.enums.EventType;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "athletics_competitions")
 public class AthleticsCompetition extends Event {
+    @ManyToMany
+    @JoinTable(
+            name = "competition_athletes",
+            joinColumns = @JoinColumn(name = "competition_id"),
+            inverseJoinColumns = @JoinColumn(name = "athlete_id")
+    )
     private Set<Person> athletes = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "winner_id")
     private Person winner;
 
     public AthleticsCompetition() {

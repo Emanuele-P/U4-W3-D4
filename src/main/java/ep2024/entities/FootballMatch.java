@@ -1,14 +1,24 @@
 package ep2024.entities;
 
 import ep2024.enums.EventType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "football_matches")
 public class FootballMatch extends Event {
+    @Column(name = "home_team")
     private String homeTeam;
+    @Column(name = "away_team")
     private String awayTeam;
+    @Column(name = "winning_team")
     private String winningTeam; // change to null in case of draw
+    @Column(name = "home_team_goals")
     private int homeTeamGoals;
+    @Column(name = "away_team_goals")
     private int awayTeamGoals;
 
     public FootballMatch() {
