@@ -10,30 +10,26 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "football_matches")
 public class FootballMatch extends Event {
-    @Column(name = "home_team")
+    @Column(name = "home_team", nullable = false)
     private String homeTeam;
-    @Column(name = "away_team")
+    @Column(name = "away_team", nullable = false)
     private String awayTeam;
     @Column(name = "winning_team")
     private String winningTeam; // change to null in case of draw
-    @Column(name = "home_team_goals")
+    @Column(name = "home_team_goals", nullable = false)
     private int homeTeamGoals;
-    @Column(name = "away_team_goals")
+    @Column(name = "away_team_goals", nullable = false)
     private int awayTeamGoals;
 
     public FootballMatch() {
     }
 
     public FootballMatch(String title, LocalDate date, String description, EventType type, int numOfParticipants,
-                         Person.Location location, String homeTeam, String winningTeam, String awayTeam, int homeTeamGoals,
-                         int awayTeamGoals) {
+                         Location location, String homeTeam, String awayTeam) {
 
         super(title, date, description, type, numOfParticipants, location);
         this.homeTeam = homeTeam;
-        this.winningTeam = winningTeam;
         this.awayTeam = awayTeam;
-        this.homeTeamGoals = homeTeamGoals;
-        this.awayTeamGoals = awayTeamGoals;
     }
 
     public String getHomeTeam() {

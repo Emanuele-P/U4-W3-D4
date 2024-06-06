@@ -25,7 +25,7 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
-    private Person.Location location;
+    private Location location;
 
     @OneToMany(mappedBy = "event")
     private List<Participation> participationList;
@@ -33,7 +33,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(String title, LocalDate date, String description, EventType type, int numOfParticipants, Person.Location location) {
+    public Event(String title, LocalDate date, String description, EventType type, int numOfParticipants, Location location) {
         this.title = title;
         this.date = date;
         this.description = description;
@@ -86,11 +86,11 @@ public class Event {
         this.numOfParticipants = numOfParticipants;
     }
 
-    public Person.Location getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(Person.Location location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 

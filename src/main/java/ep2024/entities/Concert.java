@@ -2,10 +2,7 @@ package ep2024.entities;
 
 import ep2024.enums.ConcertGenre;
 import ep2024.enums.EventType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -14,12 +11,13 @@ import java.time.LocalDate;
 public class Concert extends Event {
     @Enumerated(EnumType.STRING)
     private ConcertGenre genre;
+    @Column(name = "in_streaming", nullable = false)
     private boolean inStreaming;
 
     public Concert() {
     }
 
-    public Concert(String title, LocalDate date, String description, EventType type, int numOfParticipants, Person.Location location, ConcertGenre genre, boolean inStreaming) {
+    public Concert(String title, LocalDate date, String description, EventType type, int numOfParticipants, Location location, ConcertGenre genre, boolean inStreaming) {
         super(title, date, description, type, numOfParticipants, location);
         this.genre = genre;
         this.inStreaming = inStreaming;

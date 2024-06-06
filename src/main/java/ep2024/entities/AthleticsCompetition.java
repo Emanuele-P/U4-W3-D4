@@ -4,7 +4,6 @@ import ep2024.enums.EventType;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +15,7 @@ public class AthleticsCompetition extends Event {
             joinColumns = @JoinColumn(name = "competition_id"),
             inverseJoinColumns = @JoinColumn(name = "athlete_id")
     )
-    private Set<Person> athletes = new HashSet<>();
+    private Set<Person> athletes;
 
     @ManyToOne
     @JoinColumn(name = "winner_id")
@@ -25,7 +24,7 @@ public class AthleticsCompetition extends Event {
     public AthleticsCompetition() {
     }
 
-    public AthleticsCompetition(String title, LocalDate date, String description, EventType type, int numOfParticipants, Person.Location location, Set<Person> athletes, Person winner) {
+    public AthleticsCompetition(String title, LocalDate date, String description, EventType type, int numOfParticipants, Location location, Set<Person> athletes, Person winner) {
         super(title, date, description, type, numOfParticipants, location);
         this.athletes = athletes;
         this.winner = winner;
