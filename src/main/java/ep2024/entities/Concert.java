@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "concerts")
+@NamedQuery(name = "get_concert_in_streaming", query = "SELECT c FROM Concert c WHERE c.inStreaming=:inStreaming")
 public class Concert extends Event {
     @Enumerated(EnumType.STRING)
     private ConcertGenre genre;
@@ -44,6 +45,6 @@ public class Concert extends Event {
         return "Concert{" +
                 "genre=" + genre +
                 ", inStreaming=" + inStreaming +
-                '}';
+                '}' + super.toString();
     }
 }

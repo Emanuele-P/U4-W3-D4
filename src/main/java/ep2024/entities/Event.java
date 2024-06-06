@@ -111,8 +111,7 @@ public class Event {
                 ", description='" + description + '\'' +
                 ", type=" + type +
                 ", numOfParticipants=" + numOfParticipants +
-                ", location=" + location +
-                ", participation=" + participationList +
+                ", location='" + (location != null ? location.getName() : "null") + '\'' +
                 '}';
     }
 }

@@ -48,8 +48,13 @@ public class Application {
 //        pad.save(participation);
 
         Location matchLocation = ld.findById("6d1afb4c-c937-4314-9c17-eab47e55869d");
-        FootballMatch m1 = new FootballMatch("Champions League", LocalDate.of(2024, 7, 12), "Finals", EventType.PUBLIC, 80000, matchLocation, "Juve", "Inter");
-//        ed.save(m1);
+        FootballMatch match = new FootballMatch("Champions League", LocalDate.of(2024, 5, 15), "Quarter finals", EventType.PUBLIC, 70000, matchLocation, "Manchester", "Liverpool");
+        match.setHomeTeamGoals(1);
+        match.setAwayTeamGoals(1);
+//        match.setWinningTeam();
+//        ed.save(match);
+        System.out.println("--------DRAW---------");
+        ed.getDrawMatches().forEach(System.out::println);
 
         Location concertLocation = ld.findById("42bf00f1-8c35-4445-9aae-5b7ef54de90f");
         Concert c1 = new Concert("Concert", LocalDate.now(), "concert example", EventType.PUBLIC, 30000, concertLocation, ConcertGenre.POP, false);
@@ -63,27 +68,16 @@ public class Application {
         Location atLocation = ld.findById("036a3a6e-a117-4f1c-91db-aa2038c16743");
 
         AthleticsCompetition competition = new AthleticsCompetition("100m Sprint", LocalDate.of(2024, 7, 18), "Finals, Female", EventType.PUBLIC, 1000, atLocation, athletes, winner);
-        try {
-            ed.save(competition);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error while committing the transaction: " + e.getMessage());
-        }
-
 //        try {
-//            Person personDB = pd.findById("59485f9c-4d14-43c8-8e6f-16c737163b6c");
-//            Event eventDB = ed.findById("2837e8b4-fb71-429a-b91b-53f160647c7f");
-//            System.out.println("------------------------------" + eventDB.getDescription());
-//            System.out.println("------------------------------" + personDB.getSurname());
+//            ed.save(competition);
 //        } catch (NotFoundException ex) {
 //            System.out.println(ex.getMessage());
 //        }
 
-//        try {
-//            ed.deleteById("");
-//        } catch (NotFoundException ex) {
-//            System.out.println(ex.getMessage());
-//        }
+        System.out.println("In streaming concerts:");
+        ed.getConcertInStreaming(false).forEach(System.out::println);
+        System.out.println("Concerts by genre:");
+        ed.getConcertByGenre(ConcertGenre.POP).forEach(System.out::println);
 
         em.close();
         emf.close();

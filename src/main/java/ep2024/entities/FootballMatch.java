@@ -3,12 +3,16 @@ package ep2024.entities;
 import ep2024.enums.EventType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "football_matches")
+@NamedQuery(name = "get_matches_won_at_home", query = "SELECT p FROM FootballMatch p WHERE p.homeTeamGoals > p.awayTeamGoals")
+@NamedQuery(name = "get_matches_won_away", query = "SELECT p FROM FootballMatch p WHERE p.awayTeamGoals > p.homeTeamGoals")
+@NamedQuery(name = "get_draw_matches", query = "SELECT p FROM FootballMatch p WHERE p.awayTeamGoals = p.homeTeamGoals AND p.winningTeam IS NULL")
 public class FootballMatch extends Event {
     @Column(name = "home_team", nullable = false)
     private String homeTeam;
