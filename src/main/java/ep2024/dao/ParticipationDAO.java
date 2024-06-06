@@ -22,18 +22,18 @@ public class ParticipationDAO {
         System.out.println("----------The participation: " + participation + " has been saved correctly!");
     }
 
-    public Participation findById(String id) {
-        Participation participation = em.find(Participation.class, UUID.fromString(id));
-        if (participation == null) throw new NotFoundException(id);
-        return new Participation();
+    public Participation findById(String participationId) {
+        Participation participation = em.find(Participation.class, UUID.fromString(participationId));
+        if (participation == null) throw new NotFoundException(participationId);
+        return participation;
     }
 
-    public void deleteById(String id) {
-        Participation found = this.findById(id);
+    public void deleteById(String participationId) {
+        Participation found = this.findById(participationId);
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.remove(found);
         transaction.commit();
-        System.out.println("----------The location with id: " + id + " has been removed correctly!");
+        System.out.println("----------The location with id: " + participationId + " has been removed correctly!");
     }
 }

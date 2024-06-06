@@ -1,6 +1,6 @@
 package ep2024.dao;
 
-import ep2024.enums.Location;
+import ep2024.entities.Person;
 import ep2024.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -14,7 +14,7 @@ public class LocationDAO {
         this.em = em;
     }
 
-    public void save(Location location) {
+    public void save(Person.Location location) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.persist(location);
@@ -22,18 +22,18 @@ public class LocationDAO {
         System.out.println("----------The location: " + location + " has been saved correctly!");
     }
 
-    public Location findById(String id) {
-        Location location = em.find(Location.class, UUID.fromString(id));
-        if (location == null) throw new NotFoundException(id);
-        return new Location();
+    public Person.Location findById(String locationId) {
+        Person.Location location = em.find(Person.Location.class, UUID.fromString(locationId));
+        if (location == null) throw new NotFoundException(locationId);
+        return location;
     }
 
-    public void deleteById(String id) {
-        Location found = this.findById(id);
+    public void deleteById(String locationId) {
+        Person.Location found = this.findById(locationId);
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.remove(found);
         transaction.commit();
-        System.out.println("----------The location with id: " + id + " has been removed correctly!");
+        System.out.println("----------The location with id: " + locationId + " has been removed correctly!");
     }
 }

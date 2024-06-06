@@ -16,11 +16,15 @@ public class EventDAO {
     }
 
     public void save(Event event) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(event);
-        transaction.commit();
-        System.out.println("----------The event: " + event + " has been saved correctly!");
+        try {
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            em.persist(event);
+            transaction.commit();
+            System.out.println("----------The event: " + event + " has been saved correctly!");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Event findById(String eventId) {

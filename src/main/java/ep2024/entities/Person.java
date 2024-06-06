@@ -21,7 +21,7 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private PersonSex sex;
 
-    @ManyToMany(mappedBy = "peopleList")
+    @OneToMany(mappedBy = "person")
     private List<Participation> participationList;
 
     public Person() {
@@ -97,5 +97,64 @@ public class Person {
                 ", yearOfBirth=" + yearOfBirth +
                 ", sex=" + sex +
                 '}';
+    }
+
+    @Entity
+    @Table(name = "locations")
+    public static class Location {
+        @Id
+        @GeneratedValue
+        private UUID id;
+        private String name;
+        private String city;
+
+        @OneToMany(mappedBy = "location")
+        private List<Event> eventList;
+
+        public Location() {
+        }
+
+        public Location(String name, String city) {
+            this.name = name;
+            this.city = city;
+        }
+
+        public UUID getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public List<Event> getEventList() {
+            return eventList;
+        }
+
+        public void setEventList(List<Event> eventList) {
+            this.eventList = eventList;
+        }
+
+        @Override
+        public String toString() {
+            return "Location{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", city='" + city + '\'' +
+                    ", eventList=" + eventList +
+                    '}';
+        }
     }
 }

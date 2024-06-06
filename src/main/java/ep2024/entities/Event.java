@@ -1,7 +1,6 @@
 package ep2024.entities;
 
 import ep2024.enums.EventType;
-import ep2024.enums.Location;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -25,7 +24,7 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
-    private Location location;
+    private Person.Location location;
 
     @OneToMany(mappedBy = "event")
     private List<Participation> participationList;
@@ -33,7 +32,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(String title, LocalDate date, String description, EventType type, int numOfParticipants, Location location) {
+    public Event(String title, LocalDate date, String description, EventType type, int numOfParticipants, Person.Location location) {
         this.title = title;
         this.date = date;
         this.description = description;
@@ -86,11 +85,11 @@ public class Event {
         this.numOfParticipants = numOfParticipants;
     }
 
-    public Location getLocation() {
+    public Person.Location getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(Person.Location location) {
         this.location = location;
     }
 

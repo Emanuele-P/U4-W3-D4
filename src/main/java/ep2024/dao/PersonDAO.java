@@ -22,18 +22,18 @@ public class PersonDAO {
         System.out.println("----------The user: " + person + " has been saved correctly!");
     }
 
-    public Person findById(String id) {
-        Person person = em.find(Person.class, UUID.fromString(id));
-        if (person == null) throw new NotFoundException(id);
+    public Person findById(String personId) {
+        Person person = em.find(Person.class, UUID.fromString(personId));
+        if (person == null) throw new NotFoundException(personId);
         return person;
     }
 
-    public void deleteById(String id) {
-        Person found = this.findById(id);
+    public void deleteById(String personId) {
+        Person found = this.findById(personId);
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.remove(found);
         transaction.commit();
-        System.out.println("----------The user with id: " + id + " has been removed correctly!");
+        System.out.println("----------The user with id: " + personId + " has been removed correctly!");
     }
 }

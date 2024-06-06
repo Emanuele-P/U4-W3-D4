@@ -3,7 +3,6 @@ package ep2024.entities;
 import ep2024.enums.Status;
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,11 +16,9 @@ public class Participation {
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    @ManyToMany
-    @JoinTable(name = "participations_categories",
-            joinColumns = @JoinColumn(name = "participation_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "person_id", nullable = false))
-    private List<Person> peopleList;
+    @ManyToOne
+    @JoinColumn(name = "person_id", nullable = false)
+    private Person person;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -29,9 +26,9 @@ public class Participation {
     public Participation() {
     }
 
-    public Participation(Event event, List<Person> peopleList, Status status) {
+    public Participation(Event event, Person person, Status status) {
         this.event = event;
-        this.peopleList = peopleList;
+        this.person = person;
         this.status = status;
     }
 
@@ -47,12 +44,12 @@ public class Participation {
         this.event = event;
     }
 
-    public List<Person> getPeopleList() {
-        return peopleList;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPeopleList(List<Person> peopleList) {
-        this.peopleList = peopleList;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public Status getStatus() {
@@ -68,7 +65,7 @@ public class Participation {
         return "Participation{" +
                 "id=" + id +
                 ", event=" + event +
-                ", peopleList=" + peopleList +
+                ", person=" + person +
                 ", status=" + status +
                 '}';
     }
